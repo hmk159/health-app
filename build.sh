@@ -40,15 +40,10 @@ $BUILD_TOOLS/d8 \
     --output build/out \
     build/obj/com/example/healthapp/*.class
 
-# Add DEX to APK
+# Add DEX to APK while preserving aapt2 structure
 echo "Packaging APK..."
-cd build/out
-unzip -q app-base.apk -d app_extracted
-mv classes.dex app_extracted/
-rm app-base.apk
-cd app_extracted
-zip -rq ../app-unsigned.apk .
-cd ../../..
+cp build/out/app-base.apk build/out/app-unsigned.apk
+zip -qj build/out/app-unsigned.apk build/out/classes.dex
 
 # Align APK
 echo "Aligning APK..."
