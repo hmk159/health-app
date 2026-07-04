@@ -71,6 +71,9 @@ $BUILD_TOOLS/apksigner sign \
     --ks build/debug.keystore \
     --ks-pass pass:android \
     --key-pass pass:android \
+    --v1-signing-enabled true \
+    --v2-signing-enabled true \
+    --v3-signing-enabled true \
     --out HealthApp.apk \
     build/out/app-aligned.apk
 
