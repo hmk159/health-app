@@ -54,26 +54,26 @@ cd ../../..
 echo "Aligning APK..."
 $BUILD_TOOLS/zipalign -p -f 4 build/out/app-unsigned.apk build/out/app-aligned.apk
 
-# Generate debug keystore if needed
-if [ ! -f build/debug.keystore ]; then
-    echo "Generating debug keystore..."
+# Generate release keystore if needed
+if [ ! -f build/release.keystore ]; then
+    echo "Generating release keystore..."
     keytool -genkey -v \
-        -keystore build/debug.keystore \
-        -alias androiddebugkey \
+        -keystore build/release.keystore \
+        -alias healthapp \
         -keyalg RSA -keysize 2048 -validity 10000 \
         -storepass android -keypass android \
-        -dname "CN=Android Debug,O=Android,C=US"
+        -dname "CN=Health App,O=HealthApp,C=US"
 fi
 
 # Sign APK
 echo "Signing APK..."
 $BUILD_TOOLS/apksigner sign \
-    --ks build/debug.keystore \
+    --ks build/release.keystore \
     --ks-pass pass:android \
     --key-pass pass:android \
-    --v1-signing-enabled true \
-    --v2-signing-enabled true \
-    --v3-signing-enabled true \
+    --v1-signing-enabled \
+    --v2-signing-enabled \
+    --v3-signing-enabled \
     --out HealthApp.apk \
     build/out/app-aligned.apk
 
