@@ -2,8 +2,8 @@
 set -e
 
 export ANDROID_HOME=/workspace/android-sdk
-BUILD_TOOLS=$ANDROID_HOME/build-tools/34.0.0
-PLATFORM=$ANDROID_HOME/platforms/android-34
+BUILD_TOOLS=$ANDROID_HOME/build-tools/35.0.1
+PLATFORM=$ANDROID_HOME/platforms/android-35
 
 rm -rf build
 mkdir -p build/compiled_res build/gen build/obj build/out
@@ -20,7 +20,7 @@ $BUILD_TOOLS/aapt2 link \
     --manifest AndroidManifest.xml \
     -A assets \
     --java build/gen \
-    --target-sdk-version 34 \
+    --target-sdk-version 35 \
     --min-sdk-version 24 \
     build/compiled_res/*.flat
 
